@@ -1,17 +1,14 @@
 {
-  "modules-left": ["niri/workspaces", "niri/mode"],
+  "modules-left": ["niri/workspaces"],
   "modules-center": ["clock", "idle_inhibitor"],
   "modules-right": ["tray", "pulseaudio", "network", "battery"],
 
-  "niri/mode": {
-    "format": "<span style=\"italic\">{}</span>",
-  },
   "network": {
     "format-wifi": "{essid} ({signalStrength}%) WIFI",
     "format-ethernet": "{ifname} ETH",
     "format-disconnected": "NC",
     "max-length": 50,
-    "on-click": "alacritty -e 'nmtui'",
+    "on-click": "alacritty -e 'impala'",
   },
   "idle_inhibitor": {
     "format": "{icon}",
@@ -48,7 +45,6 @@
   },
   "battery": {
     "states": {
-      // "good": 95,
       "warning": 30,
       "critical": 15,
     },

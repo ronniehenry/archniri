@@ -31,7 +31,10 @@ rm -rf git
 sudo pacman -S noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-liberation otf-font-awesome ttf-jetbrains-mono ttf-jetbrains-mono-nerd
 
 # install sound libraries and tools
-sudo pacman -S lib32-piepwire pavucontrol
+sudo pacman -S lib32-pipewire pavucontrol
+
+# install network settings TUI
+sudo pacman -S impala
 
 # install bluetooth applet
 sudo pacman -S blueman

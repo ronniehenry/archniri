@@ -19,7 +19,7 @@ sudo systemctl enable fstrim.timer
 # install useful packages
 sudo pacman -S base-devel git btop wget curl fd unzip zip bash-completion openssh python python-pip python-gobject ripgrep fzf eza fuse2 cmake reflector sassc man-db man-pages texinfo gcc gdb flatpak lm_sensors
 
-# install AUR manager
+# install AUR manager (yay)
 cd ~
 git clone https://aur.archlinux.org/yay.git
 cd yay
@@ -33,11 +33,14 @@ sudo pacman -S noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-liberation otf-fon
 # install sound libraries and tools
 sudo pacman -S lib32-pipewire pavucontrol
 
-# install network settings TUI
-sudo pacman -S impala
-
 # install bluetooth applet
 sudo pacman -S blueman
+
+# install asus laptop control
+yay -S asusctl
+
+# set laptop battery max charge setting to 80%
+sudo asusctl -c 80
 
 # install niri
 sudo pacman -S niri fuzzel mako waybar xdg-desktop-portal-gnome xdg-desktop-portal-gtk alacritty swaybg swayidle swaylock xwayland-satellite udiskie
@@ -68,3 +71,4 @@ cd ~/Code/Github
 git clone https://www.github.com/ronniehenry/archniri.git
 cd .config
 cp -r * ~/.config/
+cd ~

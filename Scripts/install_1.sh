@@ -11,7 +11,7 @@ nmcli device wifi connect HenryMesh --ask
 sudo pacman -Syu
 
 # install Intel graphics drivers
-sudo pacman -S mesa lib-mesa vulkan-intel lib32-vulkan-intel
+sudo pacman -S mesa lib32-mesa vulkan-intel lib32-vulkan-intel
 
 # enable fstrim script
 sudo systemctl enable fstrim.timer
@@ -36,18 +36,24 @@ sudo pacman -S lib32-pipewire pavucontrol
 # install bluetooth applet
 sudo pacman -S blueman
 
+# install brightness control
+sudo pacman -S brightnessctl
+
+# install power profiles
+sudo pacman -S power-profiles-daemon
+
 # install asus laptop control
 yay -S asusctl
 
 # set laptop battery max charge setting to 80%
-sudo asusctl -c 80
+asusctl -c 80
 
 # install niri
 sudo pacman -S niri fuzzel mako waybar xdg-desktop-portal-gnome xdg-desktop-portal-gtk alacritty swaybg swayidle swaylock xwayland-satellite udiskie
 
 # install login manager
-sudo pacman -S ly
-sudo systemctl enable ly.service
+sudo pacman -S sddm
+sudo systemctl enable sddm.service
 
 # install printing, scanning drivers
 sudo pacman -S cups cups-pdf sane sane-airscan
@@ -69,6 +75,6 @@ sudo systemctl disable NetworkManager-wait-online.service
 mkdir -p ~/Code/Github
 cd ~/Code/Github
 git clone https://www.github.com/ronniehenry/archniri.git
-cd .config
+cd ./archniri/.config
 cp -r * ~/.config/
 cd ~

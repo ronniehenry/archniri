@@ -1,60 +1,153 @@
 {
-  "modules-left": ["niri/workspaces"],
-  "modules-center": ["clock", "idle_inhibitor"],
-  "modules-right": ["tray", "pulseaudio", "network", "battery"],
-
-  "network": {
-    "format-wifi": "{essid} ({signalStrength}%) WIFI",
-    "format-ethernet": "{ifname} ETH",
-    "format-disconnected": "NC",
-    "max-length": 50,
-    "on-click": "alacritty -e 'impala'",
+  "layer": "top",
+  "position": "top",
+  "autohide": true,
+  "autohide-blocked": false,
+  "exclusive": true,
+  "passthrough": false,
+  "gtk-layer-shell": true,
+  /* === Modules Order === */
+  "modules-left": [
+    "custom/archicon",
+    "clock",
+    "cpu",
+    "memory",
+    "disk",
+    "temperature",
+    "wlr/taskbar"
+  ],
+  "modules-center": [
+    "niri/workspaces"
+  ],
+  "modules-right": [
+    "tray",
+    "idle_inhibitor",
+    "pulseaudio/slider",
+    "pulseaudio",
+    "network",
+    "niri/language",
+    "battery"
+  ],
+  /* === Modules Left === */
+  "custom/archicon": {
+    "format": "",
+    "on-click": "fuzzel",
+    "tooltip": false
+  },
+  "clock": {
+    "timezone": "Asia/Manila",
+    "format": "{:%I:%M  %m/%d}",
+    "tooltip-format": "{calendar}",
+    "calendar": {
+      "mode": "month"
+    }
+  },
+  "cpu": {
+    "format": "{usage}% ",
+    "tooltip": true,
+    "tooltip-format": "CPU usage: {usage}%\nCores: {cores}"
+  },
+  "memory": {
+    "format": "{}% 󰍛",
+    "tooltip": true,
+    "tooltip-format": "RAM used: {used} / {total} ({percentage}%)"
+  },
+  "disk": {
+    "format": "{percentage_free}% ",
+    "tooltip": true,
+    "tooltip-format": "Free space: {free} / {total} ({percentage_free}%)"
+  },
+  "temperature": {
+    "format": "{temperatureC}°C {icon}",
+    "tooltip": true,
+    "tooltip-format": "CPU temperature: {temperatureC}°C\nCritical > 80°C",
+    "format-icons": [
+      ""
+    ]
+  },
+  /* === Modules Center === */
+  "niri/workspaces": {
+    "format": "{icon}",
+    "format-icons": {
+      "default": "",
+      "active": ""
+    },
+    "persistent-workspaces": {
+      "*": 2
+    },
+    "disable-scroll": true,
+    "all-outputs": true,
+    "show-special": true
+  },
+  /* === Modules Right === */
+  "wlr/taskbar": {
+    "format": "{icon}",
+    "all-outputs": true,
+    "active-first": true,
+    "tooltip-format": "{name}",
+    "on-click": "activate",
+    "on-click-middle": "close",
+    "ignore-list": [
+      "fuzzel"
+    ]
   },
   "idle_inhibitor": {
     "format": "{icon}",
     "format-icons": {
-      "activated": "IDLE ON",
-      "deactivated": "IDLE OFF",
-    },
+      "activated": "",
+      "deactivated": ""
+    }
   },
-  "tray": {
-    "icon-size": 15,
-    "spacing": 10,
-  },
-  "clock": {
-    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-    "format-alt": "{:%Y-%m-%d}",
+  "pulseaudio/slider": {
+    "format": "{volume}%",
+    "format-muted": " MUTE",
+    "step": 5,
+    "tooltip": false
   },
   "pulseaudio": {
-    "format": "{volume}% {icon} {format_source} ",
-    "format-bluetooth": "{volume}% {icon} BT {format_source} ",
-    "format-bluetooth-muted": "0% {icon} BT {format_source} ",
-    "format-muted": "0% {icon} {format_source} ",
-    "format-source": "{volume}% SRC",
-    "format-source-muted": "0% SRC",
+    "format": "{volume}% {icon}",
+    "format-muted": " {format_source}",
     "format-icons": {
-      "headphone": "HP",
-      "hands-free": "HF",
-      "headset": "HS",
-      "phone": "PH",
-      "portable": "PT",
-      "car": "CAR",
-      "default": "SPK",
-    },
-    "on-click": "pavucontrol",
+      "default": [
+        "",
+        ""
+      ]
+    }
+  },
+  "network": {
+    "format": "{ifname}",
+    "format-ethernet": "{ifname} 󰈀",
+    "format-disconnected": " ",
+    "tooltip-format": " {ifname} via {gwaddr}",
+    "tooltip-format-ethernet": " {ifname} {ipaddr}/{cidr}",
+    "tooltip-format-disconnected": "Disconnected",
+    "max-length": 50
+  },
+  "niri/language": {
+    "format": "{} ",
+    "format-en": "ENG"
+  },
+  "tray": {
+    "icon-size": 21,
+    "spacing": 10,
+    "icons": {
+      "blueman": "bluetooth"
+    }
   },
   "battery": {
+    "bat": "BAT0",
+    "interval": 60,
     "states": {
-      "warning": 30,
-      "critical": 15,
+      "warning": 20,
+      "critical": 10
     },
-    "format": "{capacity}% BAT",
-    "format-full": "{capacity}% FULL",
-    "format-charging": "{capacity}% CHG",
-    "format-plugged": "{capacity}% PLG",
-    "format-alt": "{time} LEFT",
-  },
-  "battery#bat2": {
-    "bat": "BAT2",
-  },
+    "events": {
+      "on-discharging-warning": "notify-send -u normal 'Low Battery'",
+      "on-discharging-critical": "notify-send -u critical 'Very Low Battery'",
+      "on-charging-100": "notify-send -u normal 'Battery Full!'"
+    },
+    "format": "{capacity}% {icon}",
+    "format-icons": ["", "", "", "", ""],
+    "max-length": 25
+  }
 }
